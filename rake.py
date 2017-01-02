@@ -1,7 +1,7 @@
 """RAKE Algorithm Implementation"""
 import re
 
-from utils import process_string, split_words
+from utils import process_string, remove_white_spaces, split_words
 from settings import STOPWORDS_LIST
 
 
@@ -38,7 +38,7 @@ class Rake(object):
             candidate_sentence = re.sub(self.stopwords_regex(), '|', sentence)
             phrases = candidate_sentence.split("|")
             for phrase in phrases:
-                phrase = process_string(phrase).lower()
+                phrase = remove_white_spaces(phrase).lower()
                 if phrase:
                     candidate_phrases.append(phrase)
         return candidate_phrases
