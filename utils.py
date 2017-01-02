@@ -28,14 +28,3 @@ def split_words(phrase, word_size=0):
         if word and len(word) > word_size and not word.isdigit():
             words.append(word)
     return words
-
-def occurrences_of_word(word, input_string):
-    return sum(1 for _ in re.finditer(r'\b%s\b' % re.escape(word), input_string))
-
-def occurrences_of_word_in_list(word, input_list):
-    return sum(occurrences_of_word(word, input_string) for input_string in input_list)
-
-def tfidf(word, words, phrase, sentences):
-    tf = occurrences_of_word(word, phrase) / len(words)
-    idf = math.log(len(sentences) / (1 + occurrences_of_word_in_list(word, sentences)))
-    return tf * idf
